@@ -1,5 +1,6 @@
+#pragma once
 #include <iostream>
-
+#include <cstdio>
 #include "utils.h"
 union dptr_arrvl {  // время отбытия (часы), время полета (минуты)
   double hours;
@@ -23,3 +24,6 @@ void FindStruct(planes* ptr, int counter);
 planes* DeleteElement(planes* ptr, int& counter, int element);
 planes* ChangeElement(planes* ptr, int counter, int element);
 void quick(planes* ptr, int counter);
+void updateElementInFile(const char* filename, planes* element, int index);
+void updateElementCount(const char* filename, int count);
+planes* loadFromFile(const char* filename, int& count);

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.22)
 project(LR8)
 
-add_executable(main Task_1.cpp CreatingNewStructArray.cpp utils.cpp mainmenu.cpp findStructs.cpp addstructs.cpp deleteOrChange.cpp quicksort.cpp)
+add_executable(main Task_1.cpp CreatingNewStructArray.cpp utils.cpp mainmenu.cpp findStructs.cpp addstructs.cpp deleteOrChange.cpp quicksort.cpp functionsForBinaryFile.cpp)
 
 #Address Sanitizer
 #add_executable(AddressSan main.cpp Task_1.cpp Task_2.cpp Task_3.cpp Task_4.cpp Task_5.cpp)

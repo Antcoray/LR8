@@ -11,10 +11,10 @@ void swap(planes& a, planes& b) {
   b = temp;
 }
 
-// Разделение массива и возвращение индекса опорного элемента
+// Разделение массива
 int partition(planes* ptr, int low, int high) {
   // Выбираем опорный элемент (например, последний элемент массива)
-  int p = ptr[high].dptr_time.hours;  // Сортировка по полю `id`
+  int p = ptr[high].dptr_time.hours;
   int i = low - 1;
 
   // Проходим по массиву и перемещаем элементы, меньшие опорного, влево
@@ -36,7 +36,6 @@ void quickSort(planes* ptr, int low, int high) {
     // Находим индекс опорного элемента
     int pi = partition(ptr, low, high);
 
-    // Рекурсивно сортируем элементы до и после опорного элемента
     quickSort(ptr, low, pi - 1);  // Сортировка левой части
     quickSort(ptr, pi + 1, high);  // Сортировка правой части
   }
@@ -55,13 +54,15 @@ void printarray(planes* ptr, int size) {
 }
 
 void quick(planes* ptr, int counter) {
+  if (counter <= 1) {
+    std::cout << "массив слишком мал\n";
+  }
   planes* NewPtr = ptr;
-  // Вызов функции быстрой сортировки по полю `id`
+
   quickSort(NewPtr, 0, counter - 1);
 
-  std::cout << "\nОтсортированный массив по времени полета(по возрастанию):\n";
+  std::cout << "\nОтсортированный массив по отбытия(по возрастанию):\n";
   printarray(NewPtr, counter);
 
-  // Освобождаем память
   delete[] NewPtr;
 }
