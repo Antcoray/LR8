@@ -32,6 +32,9 @@ void InputAllStructsUntilN(planes *ptr, int n) {  // ввод массива с�
     ptr[i].id = i + 1;
     ptr[i].flight_length.minutes =
         15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
+
+    updateElementInFile("data.bin", &ptr[i], i);
+    updateElementCount("data.bin", i + 1);
   }
 }
 
@@ -134,7 +137,7 @@ planes *InputAllStructsUntilTRAIT(int &counter) {
     if (WasChanged[4] && ptr[i].flight_length.minutes != TraitOfFlight_length) {
       stopInput = false;
     }
-
+    updateElementInFile("data.bin", &ptr[i], i);
     i++;  // Переход к следующей структуре
     counter++;
     if (!stopInput) {
@@ -145,6 +148,7 @@ planes *InputAllStructsUntilTRAIT(int &counter) {
     }
   }
   --counter;
+  updateElementCount("data.bin", counter);
   return ptr;
 }
 
@@ -173,11 +177,12 @@ planes *InputAllStructsUntilInput(
     ptr[i].id = i + 1;
     ptr[i].flight_length.minutes =
         15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
-
+    updateElementInFile("data.bin", &ptr[i], i);
     choice = static_cast<int>(correctInputk(1));
     ++i;
   }
   counter = i;
+  updateElementCount("data.bin", counter);
   return ptr;
 }
 

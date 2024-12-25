@@ -17,12 +17,15 @@ planes* DeleteElement(planes* ptr, int& counter, int element) {
     free(ptr);
     ptr = nullptr;
     counter = 0;
+    updateElementInFile("data.bin", &ptr[0], 0);
+    updateElementCount("data.bin", counter);
     return ptr;
   }
 
-  // Сдвигаем все элементы после `index` на одну позицию влево
+  // Сдвигаем все элементы после нужного индекса на одну позицию влево
   for (int i = element - 1; i < counter; ++i) {
     ptr[i] = ptr[i + 1];
+    updateElementInFile("data.bin", &ptr[i], i);
   }
 
   // Уменьшаем размер массива
@@ -34,7 +37,9 @@ planes* DeleteElement(planes* ptr, int& counter, int element) {
     ptr[i].id = i + 1;
     ptr[i].flight_length.minutes =
         15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
+    updateElementInFile("data.bin", &ptr[i], i);
   }
+  updateElementCount("data.bin", counter);
   return ptr;
 }
 
@@ -69,6 +74,6 @@ planes* ChangeElement(planes* ptr, int counter, int element) {
     ptr[i].flight_length.minutes =
         15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
   }
-
+  updateElementInFile("data.bin", &ptr[element - 1], element - 1);
   return ptr;
 }

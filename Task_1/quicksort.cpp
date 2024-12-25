@@ -41,7 +41,6 @@ void quickSort(planes* ptr, int low, int high) {
   }
 }
 
-// Функция для вывода массива
 void printarray(planes* ptr, int size) {
   for (int i = 0; i < size; ++i) {
     std::cout << "Рейс " << ptr[i].id << "\n";
@@ -61,7 +60,7 @@ void quick(planes* ptr, int counter) {
 
   quickSort(NewPtr, 0, counter - 1);
 
-  std::cout << "\nОтсортированный массив по отбытия(по возрастанию):\n";
+  std::cout << "\nОтсортированный массив по времени отбытия(по возрастанию):\n";
   printarray(NewPtr, counter);
 
   delete[] NewPtr;

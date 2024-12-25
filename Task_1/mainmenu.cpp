@@ -24,6 +24,17 @@ void mainmenu() {
   planes *ptr = nullptr;
   int counter = 0;
 
+  std::cout
+      << "Загрузить сохраненные данные?(иначе очистить сохраненный файл)\n";
+  int unq = correctInputk(1, 1);
+
+  if (unq == 1) {
+    ptr = loadFromFile("data.bin", counter);
+  } else {
+    FILE *f = fopen("data.bin", "w");  // открываем для полной перезаписи файла
+    fclose(f);
+  }
+
   while (true) {
     std::cout
         << "\nВыберите функцию, которую хотите использовать\n1 - создать "
@@ -37,6 +48,7 @@ void mainmenu() {
 
     int choice = correctInputk(5);
     int element = -1;
+
     switch (choice) {
       case 1:
         ptr = function1(counter);

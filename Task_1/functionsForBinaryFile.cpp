@@ -33,7 +33,7 @@ planes* loadFromFile(const char* filename, int& count) {
   planes* ptr = (planes*)malloc(
       count * sizeof(planes));  // Выделяем память под массив структур
 
-  fread(ptr, sizeof(planes), count, f);   // Читаем структуры
+  fread(ptr, sizeof(planes), count, f);  // Читаем структуры
 
   fclose(f);
   return ptr;

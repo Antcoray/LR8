@@ -30,11 +30,12 @@ planes* addStructs(planes* ptr, int& counter) {
     ptr[i].id = i + 1;
     ptr[i].flight_length.minutes =
         15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
-    
+    updateElementInFile("data.bin", &ptr[i], i);
     std::cout << "Перейти к следующему рейсу?";
     choice = static_cast<int>(correctInputk(1));
     ++i;
   }
   counter = i;
+  updateElementCount("data.bin", counter);
   return ptr;
 }

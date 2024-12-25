@@ -9,7 +9,6 @@ void FindStruct(planes* ptr, int counter) {
     std::cout << "Массив структур пуст или не существует.\n";
     return;
   }
-  // int choice2 = 1;
   bool WasChanged[5] = {false, false, false, false, false};
   // инициализация переменных спец. значений
   int TraitOfID = -1;
