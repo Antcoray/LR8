@@ -30,12 +30,13 @@ void mainmenu() {
            "новый массив структур\n2 - просмотр содержимого существующего "
            "массива\n3 - дополнение уже существующего массива структур "
            "новыми структурами\n4 - поиск и вывод на экран структур с "
-           "заданным значением элемента\n5 - удаление и изменение элемента "
-           "массива структур с заданным значением элемента\n6 - упорядочение "
+           "заданным значением элемента\n5 - удаление элемента\n6 - изменение "
+           "элемента "
+           "\n7 - упорядочение "
            "массива структур по продолжительности полета\n0 - выйти\n";
 
     int choice = correctInputk(5);
-
+    int element = -1;
     switch (choice) {
       case 1:
         ptr = function1(counter);
@@ -49,6 +50,21 @@ void mainmenu() {
       case 4:
         FindStruct(ptr, counter);
         break;
+      case 5:
+        std::cout << "Какой элемент вы хотите удалить?\n";
+        element = correctInputk(2);
+        DeleteElement(ptr, counter, element);
+        break;
+      case 6:
+        std::cout << "Какой элемент вы хотите изменить?\n";
+        element = correctInputk(2);
+        ChangeElement(ptr, counter, element);
+        break;
+      case 7:
+        quick(ptr, counter);
+        break;
+      case 0:
+        return;
     }
   }
 }

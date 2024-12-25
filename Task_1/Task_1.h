@@ -20,3 +20,6 @@ void mainmenu();
 planes* addStructs(planes* ptr, int& counter);
 void PrintStructArray(const planes *ptr, int n, int mainValue);
 void FindStruct(planes* ptr, int counter);
+planes* DeleteElement(planes* ptr, int& counter, int element);
+planes* ChangeElement(planes* ptr, int counter, int element);
+void quick(planes* ptr, int counter);

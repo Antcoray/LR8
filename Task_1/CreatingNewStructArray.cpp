@@ -174,7 +174,6 @@ planes *InputAllStructsUntilInput(
     ptr[i].flight_length.minutes =
         15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
 
-    std::cout << "Перейти к следующему рейсу?";
     choice = static_cast<int>(correctInputk(1));
     ++i;
   }
