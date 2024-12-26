@@ -1,9 +1,9 @@
 #include <iostream>
 
-#include "Task_1.h"
+#include "Task_2.h"
 #include "utils.h"
 
-void PrintStructArray(const planes *ptr, int n, int minValue) {
+void PrintStructArray(buses *ptr, int n, int minValue) {
   if (ptr == nullptr || n == 0) {
     std::cout << "Массив структур пуст или не существует.\n";
     return;
@@ -12,16 +12,15 @@ void PrintStructArray(const planes *ptr, int n, int minValue) {
   std::cout << "Содержимое массива структур:\n\n";
   for (int i = minValue; i < n; ++i) {
     std::cout << "Рейс " << ptr[i].id << "\n";
-    std::cout << "Тип самолета: " << ptr[i].type << "\n";
-    std::cout << "Пункт назначения: " << ptr[i].destination << "\n";
-    std::cout << "Время отбытия: " << ptr[i].dptr_time.hours << " ч \n";
-    std::cout << "Время полета: " << ptr[i].flight_length.minutes
-              << " минут\n\n";
+    std::cout << "Тип автобуса: " << ptr[i].T.type << "\n";
+    std::cout << "Пункт назначения: " << ptr[i].D.destination << "\n";
+    std::cout << "Время отправления: " << ptr[i].dptr_time << " ч \n";
+    std::cout << "Время прибытия: " << ptr[i].arrvl_time << " ч \n";
   }
 }
 
 void mainmenu() {
-  planes *ptr = nullptr;
+  buses *ptr = nullptr;
   int counter = 0;
 
   std::cout
@@ -29,10 +28,7 @@ void mainmenu() {
   int unq = correctInputk(1, 1);
 
   if (unq == 1) {
-    ptr = loadFromFile("data.bin", counter);
-  } else {
-    FILE *f = fopen("data.bin", "w");  // открываем для полной перезаписи файла
-    fclose(f);
+    ptr = loadFromFile("data.txt", counter);
   }
 
   while (true) {
@@ -40,12 +36,11 @@ void mainmenu() {
         << "\nВыберите функцию, которую хотите использовать\n1 - создать "
            "новый массив структур\n2 - просмотр содержимого существующего "
            "массива\n3 - дополнение уже существующего массива структур "
-           "новыми структурами\n4 - поиск и вывод на экран структур с "
-           "заданным значением элемента\n5 - удаление элемента\n6 - изменение "
+           "новыми структурами\n4 - удаление элемента\n5 - изменение "
            "элемента "
-           "\n7 - упорядочение "
-           "массива структур по продолжительности полета в заданный пункт "
-           "назначения\n0 - выйти\n";
+           "\n6 - Вывести информацию о рейсах, которыми можно воспользоваться "
+           "для прибытия в пункт назначения раньше заданного времени. \n0 - "
+           "выйти\n";
 
     int choice = correctInputk(5);
     int element = -1;
@@ -61,23 +56,22 @@ void mainmenu() {
         addStructs(ptr, counter);
         break;
       case 4:
-        FindStruct(ptr, counter);
-        break;
-      case 5:
         std::cout << "Какой элемент вы хотите удалить?\n";
         element = correctInputk(2);
         DeleteElement(ptr, counter, element);
         break;
-      case 6:
+      case 5:
         std::cout << "Какой элемент вы хотите изменить?\n";
         element = correctInputk(2);
         ChangeElement(ptr, counter, element);
         break;
-      case 7:
+      case 6:
+
         quick(ptr, counter);
         break;
       case 0:
         return;
     }
+    updateElementInFile("data.txt", ptr, counter);
   }
 }
