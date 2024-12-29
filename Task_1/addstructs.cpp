@@ -8,7 +8,7 @@ planes* addStructs(planes* ptr, int& counter) {
     std::cout << "Массив структур пуст или не существует.\n";
     return nullptr;
   }
-
+  std::cout << "\033[2J\033[2H";
   int i = counter;
   int choice = 1;
   while (choice == 1) {
@@ -23,16 +23,32 @@ planes* addStructs(planes* ptr, int& counter) {
     std::cout << "Введите тип самолета[80 символов макс.]: ";
     std::cin.getline(ptr[i].type, sizeof(ptr[i].type));
 
-    std::cout << "Введите время отбытия (в часах, дробное): ";
-    ptr[i].dptr_time.hours = correctInputk(0);
+    std::cout << "\nВведите дату отправления";
 
-    // автозаполнение
+    std::cout << "\n\nВведите год: ";
+    ptr[i].date.year = correctInputk(6);
+
+    std::cout << "\n\nВведите месяц: ";
+    ptr[i].date.month = correctInputk(7);
+
+    std::cout << "\nВведите день: ";
+    ptr[i].date.day = correctInputk(8);
+
+    std::cout << "Введите время отправления";
+
+    std::cout << "\n\nВведите часы: ";
+    ptr[i].date.TIME.hours = correctInputk(9);
+
+    std::cout << "\n\nВведите минуты: ";
+    ptr[i].date.TIME.minutes = correctInputk(10);
+
+    // автозаполнение остальных полей
     ptr[i].id = i + 1;
-    ptr[i].flight_length.minutes =
-        15 * ptr[i].id + 200 + static_cast<int>(ptr[i].dptr_time.hours);
+    ptr[i].flight_length.total_minutes =
+        15 * ptr[i].id + 200 + ptr[i].date.TIME.hours;
     updateElementInFile("data.bin", &ptr[i], i);
     std::cout << "Перейти к следующему рейсу?";
-    choice = static_cast<int>(correctInputk(1));
+    choice = correctInputk(1);
     ++i;
   }
   counter = i;

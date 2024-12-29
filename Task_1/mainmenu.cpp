@@ -3,20 +3,33 @@
 #include "Task_1.h"
 #include "utils.h"
 
-void PrintStructArray(const planes *ptr, int n, int minValue) {
+void CONTINUE() {
+  std::cout << "Введите любой символ чтобы продолжить...";
+  std::string a;
+  std::cin >> a;
+}
+
+void PrintStructArray(const planes *ptr, int n, int minValue, int f) {
   if (ptr == nullptr || n == 0) {
+    std::cout << "\033[2J\033[2H";
     std::cout << "Массив структур пуст или не существует.\n";
+    CONTINUE();
     return;
   }
-
+  if(f == 0){
+  std::cout << "\033[2J\033[2H";
+  }
   std::cout << "Содержимое массива структур:\n\n";
   for (int i = minValue; i < n; ++i) {
     std::cout << "Рейс " << ptr[i].id << "\n";
     std::cout << "Тип самолета: " << ptr[i].type << "\n";
     std::cout << "Пункт назначения: " << ptr[i].destination << "\n";
-    std::cout << "Время отбытия: " << ptr[i].dptr_time.hours << " ч \n";
-    std::cout << "Время полета: " << ptr[i].flight_length.minutes
+    std::cout << "Время отбытия: " << ptr[i].date.TIME.hours << " ч " << ptr[i].date.TIME.minutes << " мин " << ptr[i].date.day << "." << ptr[i].date.month << "." << ptr[i].date.year << "\n";
+    std::cout << "Время полета: " << ptr[i].flight_length.total_minutes
               << " минут\n\n";
+  }
+  if(f == 0){
+  CONTINUE();
   }
 }
 
@@ -34,8 +47,8 @@ void mainmenu() {
     FILE *f = fopen("data.bin", "w");  // открываем для полной перезаписи файла
     fclose(f);
   }
-
   while (true) {
+    std::cout << "\033[2J\033[2H";
     std::cout
         << "\nВыберите функцию, которую хотите использовать\n1 - создать "
            "новый массив структур\n2 - просмотр содержимого существующего "

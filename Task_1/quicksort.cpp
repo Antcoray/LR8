@@ -14,12 +14,12 @@ void swap(planes& a, planes& b) {
 // Разделение массива
 int partition(planes* ptr, int low, int high) {
   // Выбираем опорный элемент (например, последний элемент массива)
-  int p = ptr[high].dptr_time.hours;
+  int p = ptr[high].flight_length.total_minutes;
   int i = low - 1;
 
   // Проходим по массиву и перемещаем элементы, меньшие опорного, влево
   for (int j = low; j <= high - 1; j++) {
-    if (ptr[j].dptr_time.hours < p) {  // Сравниваем по полю dptr_time
+    if (ptr[j].flight_length.total_minutes < p) {  // Сравниваем по полю flight_length
       i++;  // Увеличиваем индекс меньшего элемента
       swap(ptr[i], ptr[j]);  // Меняем местами элементы
     }
@@ -48,8 +48,8 @@ void printarray(planes* ptr, int size, char destination[80]) {
       std::cout << "Рейс " << ptr[i].id << "\n";
       std::cout << "Тип самолета: " << ptr[i].type << "\n";
       std::cout << "Пункт назначения: " << ptr[i].destination << "\n";
-      std::cout << "Время отбытия: " << ptr[i].dptr_time.hours << " ч \n";
-      std::cout << "Время полета: " << ptr[i].flight_length.minutes
+      std::cout << "Время отбытия: " << ptr[i].date.TIME.hours << " ч " << ptr[i].date.TIME.minutes << " мин " << ptr[i].date.day << "." << ptr[i].date.month << "." << ptr[i].date.year << "\n";
+      std::cout << "Время полета: " << ptr[i].flight_length.total_minutes
                 << " минут\n\n";
       ++j;
     }
@@ -61,8 +61,11 @@ void printarray(planes* ptr, int size, char destination[80]) {
 }
 
 void quick(planes* ptr, int counter) {
-  if (counter <= 1) {
-    std::cout << "массив слишком мал\n";
+  std::cout << "\033[2J\033[2H";
+  if (counter < 1) {
+    std::cout << "массив слишком мал для сортировки\n";
+    CONTINUE();
+    return;
   }
   planes* NewPtr = ptr;
 
@@ -74,8 +77,7 @@ void quick(planes* ptr, int counter) {
   std::cin.ignore();
   std::cin.getline(destination, sizeof(destination));
 
-  std::cout << "\nОтсортированный массив по времени отбытия(по возрастанию):\n";
+  std::cout << "\nОтсортированный массив по продолжительности полета(по возрастанию):\n";
   printarray(NewPtr, counter, destination);
-
-  delete[] NewPtr;
+  CONTINUE();
 }

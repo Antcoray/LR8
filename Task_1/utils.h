@@ -1,2 +1,2 @@
 #pragma once
-double correctInputk(int m, int b = 0);
+int correctInputk(int m, int b = 0);
