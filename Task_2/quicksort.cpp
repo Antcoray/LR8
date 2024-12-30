@@ -14,12 +14,12 @@ void swap(buses& a, buses& b) {
 // Разделение массива
 int partition(buses* ptr, int low, int high) {
   // Выбираем опорный элемент (например, последний элемент массива)
-  int p = ptr[high].arrvl_time;
+  int p = ptr[high].total_minutes.sum;
   int i = low - 1;
 
   // Проходим по массиву и перемещаем элементы, меньшие опорного, влево
   for (int j = low; j <= high - 1; j++) {
-    if (ptr[j].arrvl_time < p) {  // Сравниваем по полю arrvl_time
+    if (ptr[j].total_minutes.sum < p) {  // Сравниваем по полю total_minutes
       i++;  // Увеличиваем индекс меньшего элемента
       swap(ptr[i], ptr[j]);  // Меняем местами элементы
     }
@@ -41,16 +41,16 @@ void quickSort(buses* ptr, int low, int high) {
   }
 }
 
-void printarray(buses* ptr, int size, char destination[80], double TiMe) {
+void printarray(buses* ptr, int size, char destination[80], int TiMe) {
   int j = 0;
   for (int i = 0; i < size; ++i) {
-    if (std::strcmp(ptr[i].D.destination, destination) == 0 &&
-        ptr[i].arrvl_time < TiMe) {
-      std::cout << "Рейс " << ptr[i].id << "\n";
-      std::cout << "Тип автобуса: " << ptr[i].T.type << "\n";
-      std::cout << "Пункт назначения: " << ptr[i].D.destination << "\n";
-      std::cout << "Время отправления: " << ptr[i].dptr_time << " ч \n";
-      std::cout << "Время прибытия: " << ptr[i].arrvl_time << " ч \n";
+    if (std::strcmp(ptr[i].D, destination) == 0 &&
+        ptr[i].total_minutes.sum < TiMe) {
+      std::cout << "\nРейс " << ptr[i].id.id << "\n";
+      std::cout << "Тип автобуса: " << ptr[i].T << "\n";
+      std::cout << "Пункт назначения: " << ptr[i].D << "\n";
+      std::cout << "Время отправления: " << ptr[i].dptr_time.hours << " ч " << ptr[i].dptr_time.minutes << " мин " << ptr[i].dptr_time.day << "." << ptr[i].dptr_time.month << "." << ptr[i].dptr_time.day << "\n";
+      std::cout << "Время прибытия: " << ptr[i].arrvl_time.hours << " ч " << ptr[i].arrvl_time.minutes << " мин " << ptr[i].arrvl_time.day << "." << ptr[i].arrvl_time.month << "." << ptr[i].arrvl_time.day << "\n";
       ++j;
     }
   }
@@ -58,11 +58,15 @@ void printarray(buses* ptr, int size, char destination[80], double TiMe) {
   if (j == 0) {
     std::cout << "Нужные рейсы не найдены\n\n";
   }
+
 }
 
 void quick(buses* ptr, int counter) {
-  if (counter <= 1) {
+  std::cout << "\033[2J\033[2H";
+  if (counter < 1) {
     std::cout << "массив слишком мал\n";
+    CONTINUE();
+    return;
   }
   buses* NewPtr = ptr;
 
@@ -73,11 +77,28 @@ void quick(buses* ptr, int counter) {
   std::cout << "Введите нужный пункт назначения\n";
   std::cin.ignore();
   std::cin.getline(destination, sizeof(destination));
-  std::cout << "введите время для поиска\n";
-  double TiMe = correctInputk(0);
+  std::cout << "введите дату и время для поиска\n\n";
+  
+    std::cout << "\nВведите дату прибытия ";
+    std::cout << "\n\nВведите год: ";
+    int year = correctInputk(6);
+
+    std::cout << "\nВведите месяц: ";
+    int month = correctInputk(7);
+
+    std::cout << "\nВведите день: ";
+    int day = correctInputk(8);
+
+    std::cout << "\nВведите время прибытия";
+
+    std::cout << "\n\nВведите часы: ";
+    int hours = correctInputk(9);
+
+    std::cout << "\nВведите минуты: ";
+    int minutes = correctInputk(10);
+    int TiMe = (((year - 2000)* 365 + month * 30 + day) * 24 + hours) * 60 + minutes;
   std::cout << "\nОтсортированный массив по времени отбытия меньше заданного "
                "(по возрастанию):\n";
   printarray(NewPtr, counter, destination, TiMe);
-
-   free(NewPtr);
+  CONTINUE();
 }

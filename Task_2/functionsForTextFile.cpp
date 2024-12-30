@@ -21,13 +21,22 @@ buses* loadFromFile(const char* filename, int& count) {
 
   // Читаем каждую структуру
   for (int i = 0; i < count; ++i) {
-    fscanf(f, "%d %15s %79s %lf %lf", &ptr[i].id, ptr[i].T.type,
-           ptr[i].D.destination, &ptr[i].dptr_time, &ptr[i].arrvl_time);
+    fscanf(f, "%d %d %d %d %d %15s %79s %d %d %d %d %d %d %d %d %d %d",
+           &ptr[i].id.day, &ptr[i].id.month, &ptr[i].id.year,
+           &ptr[i].id.hours, &ptr[i].id.minutes, 
+           ptr[i].T, ptr[i].D,
+           &ptr[i].dptr_time.day, &ptr[i].dptr_time.month,
+           &ptr[i].dptr_time.year, &ptr[i].dptr_time.hours,
+           &ptr[i].dptr_time.minutes,
+           &ptr[i].arrvl_time.day, &ptr[i].arrvl_time.month,
+           &ptr[i].arrvl_time.year, &ptr[i].arrvl_time.hours,
+           &ptr[i].arrvl_time.minutes);
   }
 
   fclose(f);
   return ptr;
 }
+
 
 void updateElementInFile(const char* filename, buses* array, int count) {
   FILE* f = fopen(filename, "w");
@@ -41,9 +50,18 @@ void updateElementInFile(const char* filename, buses* array, int count) {
 
   // Записываем каждую структуру
   for (int i = 0; i < count; ++i) {
-    fprintf(f, "%d %s %s %.2f %.2f\n", array[i].id, array[i].T.type,
-            array[i].D.destination, array[i].dptr_time, array[i].arrvl_time);
+    fprintf(f, "%d %d %d %d %d %15s %79s %d %d %d %d %d %d %d %d %d %d\n",
+            array[i].id.day, array[i].id.month, array[i].id.year,
+            array[i].id.hours, array[i].id.minutes,
+            array[i].T, array[i].D,
+            array[i].dptr_time.day, array[i].dptr_time.month,
+            array[i].dptr_time.year, array[i].dptr_time.hours,
+            array[i].dptr_time.minutes,
+            array[i].arrvl_time.day, array[i].arrvl_time.month,
+            array[i].arrvl_time.year, array[i].arrvl_time.hours,
+            array[i].arrvl_time.minutes);
   }
 
   fclose(f);
 }
+

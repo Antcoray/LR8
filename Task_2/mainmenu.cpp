@@ -3,20 +3,29 @@
 #include "Task_2.h"
 #include "utils.h"
 
-void PrintStructArray(buses *ptr, int n, int minValue) {
+void CONTINUE() {
+  std::cout << "Введите любой символ чтобы продолжить...";
+  std::string a;
+  std::cin >> a;
+}
+
+void PrintStructArray(buses *ptr, int n, int minValue, int a) {
+  std::cout << "\033[2J\033[2H";
   if (ptr == nullptr || n == 0) {
     std::cout << "Массив структур пуст или не существует.\n";
+    CONTINUE();
     return;
   }
 
   std::cout << "Содержимое массива структур:\n\n";
   for (int i = minValue; i < n; ++i) {
-    std::cout << "Рейс " << ptr[i].id << "\n";
-    std::cout << "Тип автобуса: " << ptr[i].T.type << "\n";
-    std::cout << "Пункт назначения: " << ptr[i].D.destination << "\n";
-    std::cout << "Время отправления: " << ptr[i].dptr_time << " ч \n";
-    std::cout << "Время прибытия: " << ptr[i].arrvl_time << " ч \n";
+    std::cout << "Рейс " << ptr[i].id.id << "\n";
+    std::cout << "Тип автобуса: " << ptr[i].T << "\n";
+    std::cout << "Пункт назначения: " << ptr[i].D << "\n";
+    std::cout << "Время отправления: " << ptr[i].dptr_time.hours << " ч " << ptr[i].dptr_time.minutes << " мин " << ptr[i].dptr_time.day << "." << ptr[i].dptr_time.month << "." << ptr[i].dptr_time.year << "\n";
+    std::cout << "Время прибытия: " << ptr[i].arrvl_time.hours << " ч " << ptr[i].arrvl_time.minutes << " мин " << ptr[i].arrvl_time.day << "." << ptr[i].arrvl_time.month << "." << ptr[i].arrvl_time.year << "\n\n";
   }
+  CONTINUE();
 }
 
 void mainmenu() {
@@ -32,6 +41,7 @@ void mainmenu() {
   }
 
   while (true) {
+    std::cout << "\033[2J\033[2H";
     std::cout
         << "\nВыберите функцию, которую хотите использовать\n1 - создать "
            "новый массив структур\n2 - просмотр содержимого существующего "

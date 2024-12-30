@@ -64,7 +64,7 @@ int correctInputk(int m, int b) {
       }
     }
     if(m == 6){
-      if (!(x >= 2024) && incorrectInput == false) {
+      if (!(x >= 2024 && x <= 2030) && incorrectInput == false) {
         std::cout << "Некорректный ввод" << std::endl;
         incorrectInput = true;
       }
