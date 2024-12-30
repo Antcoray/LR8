@@ -105,7 +105,7 @@ buses* ChangeElement(buses* ptr, int counter, int element) {
     std::cout << "\nВведите минуты: ";
     ptr[element - 1].arrvl_time.minutes = correctInputk(10);
     // avtozapolnenie
-    ptr[element - 1].total_minutes.sum = (((ptr[element - 1].dptr_time.year - 2000) * 365 + ptr[element - 1].dptr_time.month * 30 + ptr[element - 1].dptr_time.day) * 24 + ptr[element - 1].dptr_time.hours) * 60 + ptr[element - 1].dptr_time.minutes;
+    ptr[element - 1].total_minutes.sum = (((ptr[element - 1].arrvl_time.year - 2000) * 365 + ptr[element - 1].arrvl_time.month * 30 + ptr[element - 1].arrvl_time.day) * 24 + ptr[element - 1].arrvl_time.hours) * 60 + ptr[element - 1].arrvl_time.minutes;
     break;
   }
   return ptr;

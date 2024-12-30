@@ -71,7 +71,7 @@ buses *InputAllStructsUntilInput(
 
     // автозаполнение
     ptr[i].id.id = i + 1;
-    ptr[i].total_minutes.sum = (((ptr[i].dptr_time.year - 2000) * 365 + ptr[i].dptr_time.month * 30 + ptr[i].dptr_time.day) * 24 + ptr[i].dptr_time.hours) * 60 + ptr[i].dptr_time.minutes;
+    ptr[i].total_minutes.sum = (((ptr[i].arrvl_time.year - 2000) * 365 + ptr[i].arrvl_time.month * 30 + ptr[i].arrvl_time.day) * 24 + ptr[i].arrvl_time.hours) * 60 + ptr[i].arrvl_time.minutes;
     choice = correctInputk(1);
     ++i;
   }

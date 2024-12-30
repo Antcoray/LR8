@@ -49,8 +49,8 @@ void printarray(buses* ptr, int size, char destination[80], int TiMe) {
       std::cout << "\nРейс " << ptr[i].id.id << "\n";
       std::cout << "Тип автобуса: " << ptr[i].T << "\n";
       std::cout << "Пункт назначения: " << ptr[i].D << "\n";
-      std::cout << "Время отправления: " << ptr[i].dptr_time.hours << " ч " << ptr[i].dptr_time.minutes << " мин " << ptr[i].dptr_time.day << "." << ptr[i].dptr_time.month << "." << ptr[i].dptr_time.day << "\n";
-      std::cout << "Время прибытия: " << ptr[i].arrvl_time.hours << " ч " << ptr[i].arrvl_time.minutes << " мин " << ptr[i].arrvl_time.day << "." << ptr[i].arrvl_time.month << "." << ptr[i].arrvl_time.day << "\n";
+      std::cout << "Время отправления: " << ptr[i].dptr_time.hours << " ч " << ptr[i].dptr_time.minutes << " мин " << ptr[i].dptr_time.day << "." << ptr[i].dptr_time.month << "." << ptr[i].dptr_time.year << "\n";
+      std::cout << "Время прибытия: " << ptr[i].arrvl_time.hours << " ч " << ptr[i].arrvl_time.minutes << " мин " << ptr[i].arrvl_time.day << "." << ptr[i].arrvl_time.month << "." << ptr[i].arrvl_time.year << "\n";
       ++j;
     }
   }
