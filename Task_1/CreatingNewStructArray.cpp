@@ -1,5 +1,5 @@
 #include <cstring>
-
+\
 #include "Task_1.h"
 #include "utils.h"
 planes *CreateArray(int n)  // создание массива n структур

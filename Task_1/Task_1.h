@@ -3,29 +3,8 @@
 #include <cstdio>
 #include "utils.h"
 #include <string>
-union dptr_arrvl {  // время отбытия (часы, минуты), время полета (минуты)
-  struct {
-  int hours;
-  int minutes;
-  };
-  int total_minutes;
-};
+#include "structs.h"
 
-struct datetime{
-  int day;
-  int month;
-  int year;
-  dptr_arrvl TIME;
-};
-
-typedef struct planes {
-  int id;                    // номер рейса
-  char type[80];             // тип самолета
-  char destination[80];      // пункт назначения
-  datetime date;           // время отбытия
-  dptr_arrvl flight_length;  // длительность полета
-
-} planes;
 
 planes* function1(int& counter);
 void mainmenu();
